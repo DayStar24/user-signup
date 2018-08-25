@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>User Signup</title>
+		<style>.error {color:red;}</style>
+	</head>
+	
+    <body>
+		<h1>User Signup</h1>
+		
+        <form action='/user_signup' method='post'>
+            <table>
+                <tr>
+					<td><label>Username:</label></td>
+                    <td><input name='username' type='text' value='{{username}}' /></td> 
+                    
+					{% if %}
+					<td><p class='error'>{{error_username}}</p></td>
+					{% endif %}
+					
+					{% if username|length == 0 %}
+					<td><p class='error'>Missing username</p></td>
+					{% endif %}
+                </tr>
+                
+				<tr>
+                    <td><label>Password:</label></td>
+                    <td><input name='password' type='password' value='{{password}}' /></td>
+					
+					{% if %}
+                    <td><p class='error'>{{error_password}}</p></td>
+					{% endif %}
+                </tr>
+                
+				<tr>
+                    <td><label>Verify Password:</label></td>
+                    <td><input name='verify-password' type='password' value='{{verify_password}}' /></td>
+                    
+					{% if %}
+                    <td><p class='error'>{{error_password}}</p></td>
+					{% endif %}
+                </tr>
+                
+				<tr>
+                    <td><label>Email (optinal):</label></td>
+                    <td><input name='user-email' type='text' value='{{email}}' /></td>
+					
+					{% if %}
+                    <td><p class='error'>{{error_email}}</p></td>
+					{% endif %}
+                </tr>
+            </table>
+			<input type='submit' />
+        </form>
+		
+    </body>
+</html>
