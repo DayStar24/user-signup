@@ -4,7 +4,11 @@
 <html>
 	<head>
 		<title>User Signup</title>
-		<style>.error {color:red;}</style>
+		<style>
+            html { background-color: grey; }
+            body {display:block; margin:8px; color:gray; background-color: black;}
+            .error {color:red;}
+        </style>
 	</head>
 	
     <body>
@@ -16,12 +20,12 @@
 					<td><label>Username:</label></td>
                     <td><input name='username' type='text' value='{{username}}' /></td> 
                     
-					{% if %}
-					<td><p class='error'>{{error_username}}</p></td>
+					{% if error_username %}
+					<td><span class='error'>{{error_username}}</span></td>
 					{% endif %}
 					
 					{% if username|length == 0 %}
-					<td><p class='error'>Missing username</p></td>
+					<td><span class='error'>Missing username</span></td>
 					{% endif %}
                 </tr>
                 
@@ -29,8 +33,8 @@
                     <td><label>Password:</label></td>
                     <td><input name='password' type='password' value='{{password}}' /></td>
 					
-					{% if %}
-                    <td><p class='error'>{{error_password}}</p></td>
+					{% if error_password %}
+                    <td><span class='error'>{{error_password}}</span></td>
 					{% endif %}
                 </tr>
                 
@@ -38,21 +42,21 @@
                     <td><label>Verify Password:</label></td>
                     <td><input name='verify-password' type='password' value='{{verify_password}}' /></td>
                     
-					{% if %}
-                    <td><p class='error'>{{error_password}}</p></td>
+					{% if error_verify_password %}
+                    <td><span class='error'>{{error_verify_password}}</span></td>
 					{% endif %}
                 </tr>
                 
 				<tr>
-                    <td><label>Email (optinal):</label></td>
+                    <td><label>Email (optional):</label></td>
                     <td><input name='user-email' type='text' value='{{email}}' /></td>
 					
-					{% if %}
-                    <td><p class='error'>{{error_email}}</p></td>
+					{% if error_email %}
+                    <td><span class='error'>{{error_email}}</span></td>
 					{% endif %}
                 </tr>
             </table>
-			<input type='submit' />
+			<p><input type='submit' /></p>
         </form>
 		
     </body>

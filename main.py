@@ -15,40 +15,51 @@ def index():
 @app.route("/user_signup", methods=['POST'])
 def validate_form():
 	template = ''
-	
-    username = request.form['username']
-    password = request.form['password']
-    verify_password = request.form['verify-password']
-    email = request.form['user-email']
+	username = request.form['username']
+	password = request.form['password']
+	verify_password = request.form['verify-password']
+	email = request.form['user-email']
 
-    error_username = '' 
-    error_password = '' 
-    error_email = '' 
+	error_username = '' 
+	error_password = ''
+	error_verify_password = '' 
+	error_email = '' 
 	
 	if not re.match(r'^(?=.{8,})',username):
 		error_username = 'Missing username'
-		
-    if not re.match(r'^(?=.*[a-z])',password):
-        error_password += '\tNeed lowercase letter\n'
-    if not re.match(r'^(?=.*[A-Z])',password):
-        error_password += '\tNeed uppercase letter\n'
-    if not re.match(r'^(?=.*[0-9])',password):
-        error_password += '\tNeed a number\n'
-    if not re.match(r'^(?=.*[^A-z0-9])',password):
-        error_password += '\tNeed special character\n'
-    if not re.match(r'^(?=.{8,})',password):
-        error_password += '\tNeed at least 8 characters'
+	
+	if not re.match(r'^(?=.*[a-z])',password):
+		error_password += 'Need lowercase letter'
+	if not re.match(r'^(?=.*[A-Z])',password):
+		error_password += '  |  Need uppercase letter'
+	if not re.match(r'^(?=.*[0-9])',password):
+		error_password += '  |  Need a number'
+	if not re.match(r'^(?=.*[^A-z0-9])',password):
+		error_password += '  |  Need special character'
+	if not re.match(r'^(?=.{8,})',password):
+		error_password += '  |  Need at least 8 characters'
 	
 	if verify_password != password:
-		error_password += 'Password verification failed'
+		error_verify_password = 'Password verification failed'
 		
-	if not re.match(r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)'):
+	if (email) and (not re.match(r'^(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)',email)):
 		error_email = 'Invalid email'
 	
-    if (error_username != '') or (error_password != '') or (error_email != ''):
-        template = render_template('index.html', error_username=error_username, error_password=error_password, error_email=error_email, username=username)
-    else:
-        template = render_template('/welcome.html', username=username)
+	if (error_username != '') or (error_password != '') or (error_email != ''):
+		template = render_template(
+			'index.html', 
+			error_username=error_username, 
+			error_password=error_password, 
+			error_email=error_email, 
+			username=username, 
+			email=email
+		)
+	else:
+		template = render_template(
+			'/welcome.html', 
+			username=username, 
+			email=email
+		)
 	
 	return template
 
