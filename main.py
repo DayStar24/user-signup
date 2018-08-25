@@ -5,7 +5,7 @@ templates_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(templates_dir), autoescape = True)
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
+#app.config['DEBUG'] = True
 
 #route and handler of the original form
 @app.route('/', methods = ['GET'])
@@ -66,4 +66,4 @@ def validate_form():
 
 if __name__ == '__main__':
 	#app.run(host='0.0.0.0', debug=True) # Run with this in VirtualBox <-> Vagrant
-	app.run() # Run with this in AWS
+	app.run(debug=True) # Run with this in AWS
