@@ -3,54 +3,50 @@
 <html>
     <head>
         <title>User Signup</title>
-        
+
         <style>
             html { background-color: grey; }
             body {display:block; margin:8px; color:grey; background-color: black;}
             .error {color:red;}
         </style>
     </head>
-	
+
     <body>
         <h1>User Signup</h1>
-		
+
         <form action='/user_signup' method='POST'>
             <table>
                 <tr>
                     <td><label>Username:</label></td>
-                    <td><input name='username' type='text' value='{{username}}' /></td> 
-                    
+                    <td><input name='username' type='text' value='{{username}}' /></td>
+
 {% if error_username %}
                     <td><span class='error'>{{error_username}}</span></td>
 {% endif %}
-					
-{% if username|length == 0 %}
-                    <td><span class='error'>Missing username</span></td>
-{% endif %}
                 </tr>
-                
+
                 <tr>
                     <td><label>Password:</label></td>
                     <td><input name='password' type='password' value='{{password}}' /></td>
-					
+
 {% if error_password %}
                     <td><span class='error'>{{error_password}}</span></td>
 {% endif %}
                 </tr>
-                
+
                 <tr>
                     <td><label>Verify Password:</label></td>
                     <td><input name='verify-password' type='password' value='{{verify_password}}' /></td>
-                    
+
 {% if error_verify_password %}
                     <td><span class='error'>{{error_verify_password}}</span></td>
 {% endif %}
                 </tr>
-                
+
                 <tr>
                     <td><label>Email (optional):</label></td>
                     <td><input name='user-email' type='text' value='{{email}}' /></td>
-					
+
 {% if error_email %}
                     <td><span class='error'>{{error_email}}</span></td>
 {% endif %}
@@ -59,6 +55,6 @@
 
             <p><input type='submit' /></p>
         </form>
-		
+
     </body>
 </html>

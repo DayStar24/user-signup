@@ -20,14 +20,14 @@ def validate_form():
 	verify_password = request.form['verify-password']
 	email = request.form['user-email']
 
-	error_username = '' 
+	error_username = ''
 	error_password = ''
-	error_verify_password = '' 
-	error_email = '' 
-	
+	error_verify_password = ''
+	error_email = ''
+
 	if username == '':
 		error_username = 'Missing username'
-	
+
 	if not re.match(r'^(?=.*[a-z])', password):
 		error_password += 'Need lowercase letter'
 	if not re.match(r'^(?=.*[A-Z])', password):
@@ -38,30 +38,30 @@ def validate_form():
 		error_password += '  |  Need special character'
 	if not re.match(r'^(?=.{8,})', password):
 		error_password += '  |  Need at least 8 characters'
-	
+
 	if verify_password != password:
 		error_verify_password = 'Password verification failed'
-		
+
 	if (email) and ( not re.match(r'^(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', email) ):
 		error_email = 'Invalid email'
-	
-	if (error_username != '') or (error_password != '') or (error_email != ''):
+
+	if (error_username != '') or (error_password != '') or (error_verify_password != '') or (error_email != ''):
 		template = render_template(
-			'index.html', 
-			error_username = error_username, 
+			'index.html',
+			error_username = error_username,
 			error_password = error_password,
 			error_verify_password = error_verify_password,
-			error_email = error_email, 
-			username = username, 
+			error_email = error_email,
+			username = username,
 			email = email
 		)
 	else:
 		template = render_template(
-			'/welcome.html', 
-			username = username, 
+			'/welcome.html',
+			username = username,
 			email = email
 		)
-	
+
 	return template
 
 if __name__ == '__main__':
