@@ -65,5 +65,4 @@ def validate_form():
 	return template
 
 if __name__ == '__main__':
-	#app.run(host='0.0.0.0', debug=True) # Run with this in VirtualBox <-> Vagrant
-	app.run() # Run with this in AWS
+	app.run(host='0.0.0.0', debug=True)
