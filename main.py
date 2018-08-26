@@ -5,7 +5,7 @@ templates_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(templates_dir), autoescape = True)
 
 app = Flask(__name__)
-#app.config['DEBUG'] = True
+app.config['DEBUG'] = True
 
 #route and handler of the original form
 @app.route('/', methods = ['GET'])
@@ -26,24 +26,24 @@ def validate_form():
 	error_email = ''
 
 	if username == '':
-		error_username = 'Missing username'
+		error_username = ' [ Missing username ] '
 
 	if not re.match(r'^(?=.*[a-z])', password):
-		error_password += 'Need lowercase letter'
+		error_password += ' [ Need lowercase letter ] '
 	if not re.match(r'^(?=.*[A-Z])', password):
-		error_password += '  |  Need uppercase letter'
+		error_password += ' [ Need uppercase letter ] '
 	if not re.match(r'^(?=.*[0-9])', password):
-		error_password += '  |  Need a number'
+		error_password += ' [ Need a number ] '
 	if not re.match(r'^(?=.*[^A-z0-9])', password):
-		error_password += '  |  Need special character'
+		error_password += ' [ Need special character ] '
 	if not re.match(r'^(?=.{8,})', password):
-		error_password += '  |  Need at least 8 characters'
+		error_password += ' [ Need at least 8 characters ] '
 
 	if verify_password != password:
-		error_verify_password = 'Password verification failed'
+		error_verify_password = ' [ Password verification failed ] '
 
 	if (email) and ( not re.match(r'^(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', email) ):
-		error_email = 'Invalid email'
+		error_email = ' [ Invalid email ] '
 
 	if (error_username != '') or (error_password != '') or (error_verify_password != '') or (error_email != ''):
 		template = render_template(
@@ -66,4 +66,4 @@ def validate_form():
 
 if __name__ == '__main__':
 	#app.run(host='0.0.0.0', debug=True) # Run with this in VirtualBox <-> Vagrant
-	app.run(debug=True) # Run with this in AWS
+	app.run() # Run with this in AWS
