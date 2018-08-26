@@ -7,12 +7,13 @@
         <style>
             html { background-color: grey; }
             body {display:block; margin:8px; color:grey; background-color: black;}
+            div {display:block; background-color: red; color: white;}
             .error {color:red;}
         </style>
     </head>
 
     <body>
-        <h1>User Signup</h1>
+        <h1><marquee>User Signup</marquee></h1>
 
         <form action='/user_signup' method='POST'>
             <table>
@@ -21,7 +22,7 @@
                     <td><input name='username' type='text' value='{{username}}' /></td>
 
 {% if error_username %}
-                    <td><span class='error'>{{error_username}}</span></td>
+                    <td><span class='error'>&nbsp;&nbsp;{{error_username}}</span></td>
 {% endif %}
                 </tr>
 
@@ -30,7 +31,7 @@
                     <td><input name='password' type='password' value='{{password}}' /></td>
 
 {% if error_password %}
-                    <td><span class='error'>{{error_password}}</span></td>
+                    <td><span class='error'>&nbsp;&nbsp;{{error_password}}</span></td>
 {% endif %}
                 </tr>
 
@@ -39,7 +40,7 @@
                     <td><input name='verify-password' type='password' value='{{verify_password}}' /></td>
 
 {% if error_verify_password %}
-                    <td><span class='error'>{{error_verify_password}}</span></td>
+                    <td><span class='error'>&nbsp;&nbsp;{{error_verify_password}}</span></td>
 {% endif %}
                 </tr>
 
@@ -48,7 +49,7 @@
                     <td><input name='user-email' type='text' value='{{email}}' /></td>
 
 {% if error_email %}
-                    <td><span class='error'>{{error_email}}</span></td>
+                    <td><span class='error'>&nbsp;&nbsp;{{error_email}}</span></td>
 {% endif %}
                 </tr>
             </table>
@@ -56,5 +57,34 @@
             <p><input type='submit' /></p>
         </form>
 
+{% if error_username %}
+        <br />
+        <div>
+          <li>{{error_username}}</li>
+        </div>
+{% endif %}
+
+{% if error_password %}
+        <br />
+        <div>
+{% for e in error_password.splitlines() %}
+            <li>{{e}}</li>
+{% endfor %}
+        </div>
+{% endif %}
+
+{% if error_verify_password %}
+        <br />
+        <div>
+          <li>{{error_verify_password}}</li>
+        </div>
+{% endif %}
+
+{% if error_email %}
+        <br />
+        <div>
+          <li>{{error_email}}</li>
+        </div>
+{% endif %}
     </body>
 </html>

@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 #route and handler of the original form
-@app.route('/', methods = ['GET'])
+@app.route('/', methods = ['POST'])
 def index():
     return render_template('index.html')
 
@@ -29,15 +29,15 @@ def validate_form():
 		error_username = ' [ Missing username ] '
 
 	if not re.match(r'^(?=.*[a-z])', password):
-		error_password += ' [ Need lowercase letter ] '
+		error_password += ' [ Need lowercase letter ] \n'
 	if not re.match(r'^(?=.*[A-Z])', password):
-		error_password += ' [ Need uppercase letter ] '
+		error_password += ' [ Need uppercase letter ] \n'
 	if not re.match(r'^(?=.*[0-9])', password):
-		error_password += ' [ Need a number ] '
+		error_password += ' [ Need a number ] \n'
 	if not re.match(r'^(?=.*[^A-z0-9])', password):
-		error_password += ' [ Need special character ] '
+		error_password += ' [ Need special character ] \n'
 	if not re.match(r'^(?=.{8,})', password):
-		error_password += ' [ Need at least 8 characters ] '
+		error_password += ' [ Need at least 8 characters ] \n'
 
 	if verify_password != password:
 		error_verify_password = ' [ Password verification failed ] '
