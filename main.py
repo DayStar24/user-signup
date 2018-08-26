@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 #route and handler of the original form
-@app.route('/', methods = ['POST'])
+@app.route('/', methods = ['GET','POST'])
 def index():
     return render_template('index.html')
 
