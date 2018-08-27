@@ -26,7 +26,11 @@ def validate_form():
 	error_email = ''
 
 	if username == '':
-		error_username = ' [ Missing username ] '
+		error_username = ' [ Missing ] '
+	if not re.match(r'^(?=.{3,20}$)', username):
+		error_username = ' [ Need 3 to 20 characters ] '
+	if re.match(r'^(?=.*[A-z0-9] ?)', username):
+		error_username = ' [ No spaces allowed ] '
 
 	if not re.match(r'^(?=.*[a-z])', password):
 		error_password += ' [ Need lowercase letter ] \n'
@@ -36,8 +40,8 @@ def validate_form():
 		error_password += ' [ Need a number ] \n'
 	if not re.match(r'^(?=.*[^A-z0-9])', password):
 		error_password += ' [ Need special character ] \n'
-	if not re.match(r'^(?=.{8,})', password):
-		error_password += ' [ Need at least 8 characters ] \n'
+	if not re.match(r'^(?=.{8,20}$)', password):
+		error_password += ' [ Need 8 to 20 characters ] \n'
 
 	if verify_password != password:
 		error_verify_password = ' [ Password verification failed ] '
