@@ -72,7 +72,7 @@ def validate_form():
 
 '''
 Apparently, replacing the call into app.run()
-with the following command-line invokecation, 
+with the following command-line invocation, 
 enables a more secure environment for development.
 
 $ export FLASK_ENV=development
