@@ -53,7 +53,7 @@ def validate_form():
 
 	if (error_username != '') or (error_password != '') or (error_verify_password != '') or (error_email != ''):
 		template = render_template(
-			'index.html',
+			'/index.html',
 			error_username = error_username,
 			error_password = error_password,
 			error_verify_password = error_verify_password,
