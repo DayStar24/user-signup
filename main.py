@@ -70,5 +70,14 @@ def validate_form():
 
 	return template
 
+'''
+Apparently, replacing the call into app.run()
+with the following command-line invokecation, 
+enables a more secure environment for development.
+
+$ export FLASK_ENV=development
+$ export FLASK_APP=main.py
+$ flask run
+'''
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', debug=True)
